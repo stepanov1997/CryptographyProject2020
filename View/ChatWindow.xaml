@@ -1,0 +1,35 @@
+﻿<Window x:Class="CryptographyProject2019.View.ChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CryptographyProject2019.View"
+        mc:Ignorable="d"
+        Title="ChatWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Resources/background.jpg"/>
+        </Grid.Background>
+        <Border BorderBrush="Black" BorderThickness="3" Margin="15,10,43.333,375.667" Background="Azure">
+            <TextBlock x:Name="Title" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="3" Margin="215,55,43.333,65.667">
+            <Border.Background>
+                <ImageBrush ImageSource="../Resources/SideChatBackground.jpg"></ImageBrush>
+            </Border.Background>
+            <ScrollViewer x:Name="MessagesScrollViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Height="322" Margin="0.333,0.333,-2.333,-3" Width="532"/>
+        </Border>
+        <Border x:Name="OnlineUsers" BorderBrush="Black" BorderThickness="3" Margin="15,55,600.333,20.667">
+            <Border.Background>
+                <ImageBrush ImageSource="../Resources/SideChatBackground.jpg"></ImageBrush>
+            </Border.Background>
+            <Grid x:Name="OnlineUsersGrid"></Grid>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="3">
+            <Button Content="Send" HorizontalAlignment="Left" Padding="3" Margin="670,365,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="PosaljiPoruku"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="3" Margin="215,367,138.333,20.667">
+            <TextBox x:Name="MessageBlock" Background="Azure" Margin="0.333,0.333,0.333,2"></TextBox>
+        </Border>
+    </Grid>
+</Window>

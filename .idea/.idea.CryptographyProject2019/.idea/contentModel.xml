@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\stepa\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\stepa\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_CryptographyProject2019.528024642.00" t="ExcludeRecursive" />
+    <e p="C:\Users\stepa\source\repos\CryptographyProject2019" t="IncludeRecursive">
+      <e p="App.config" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Controller" t="Include">
+        <e p="AccountsController.cs" t="Include" />
+        <e p="Cipher.cs" t="Include" />
+        <e p="DecryptController.cs" t="Include" />
+        <e p="EncryptController.cs" t="Include" />
+        <e p="ValidateController.cs" t="Include" />
+      </e>
+      <e p="CryptoFiles" t="Include">
+        <e p=".rnd" t="Include" />
+        <e p="certs" t="Include">
+          <e p="ca_cert.crt" t="Include" />
+          <e p="kriptic.pem" t="Include" />
+          <e p="kriptic_cert.crt" t="Include" />
+          <e p="miki_maus.crt" t="Include" />
+          <e p="miki_maus.pem" t="Include" />
+          <e p="milomir.crt" t="Include" />
+          <e p="milomir.pem" t="Include" />
+          <e p="sekjuritic.pem" t="Include" />
+          <e p="sekjuritic_cert.crt" t="Include" />
+          <e p="stepanov.pem" t="Include" />
+          <e p="stepanov_cert.crt" t="Include" />
+          <e p="zastitic.pem" t="Include" />
+          <e p="zastitic_cert.crt" t="Include" />
+        </e>
+        <e p="crl" t="Include">
+          <e p="list.pem" t="Include" />
+        </e>
+        <e p="crlnumber" t="Include" />
+        <e p="crlnumber.old" t="Include" />
+        <e p="index.txt" t="Include" />
+        <e p="index.txt.attr" t="Include" />
+        <e p="index.txt.attr.old" t="Include" />
+        <e p="index.txt.old" t="Include" />
+        <e p="Komande.txt" t="Include" />
+        <e p="newcerts" t="Include">
+          <e p="01.pem" t="Include" />
+          <e p="05.pem" t="Include" />
+          <e p="06.pem" t="Include" />
+          <e p="07.pem" t="Include" />
+          <e p="08.pem" t="Include" />
+          <e p="09.pem" t="Include" />
+          <e p="0A.pem" t="Include" />
+        </e>
+        <e p="openssl.cnf" t="Include" />
+        <e p="private" t="Include">
+          <e p="ca.key" t="Include" />
+          <e p="kriptic.key" t="Include" />
+          <e p="miki_maus.key" t="Include" />
+          <e p="milomir.key" t="Include" />
+          <e p="sekjuritic.key" t="Include" />
+          <e p="stepanov.key" t="Include" />
+          <e p="zastitic.key" t="Include" />
+        </e>
+        <e p="requests" t="Include">
+          <e p="ca_req.csr" t="Include" />
+          <e p="kriptic_req.csr" t="Include" />
+          <e p="miki_maus_req.csr" t="Include" />
+          <e p="milomir_req.csr" t="Include" />
+          <e p="sekjuritic_req.csr" t="Include" />
+          <e p="stepanov_req.csr" t="Include" />
+          <e p="zastitic_req.csr" t="Include" />
+        </e>
+        <e p="rootca.pem" t="Include" />
+        <e p="serial" t="Include" />
+        <e p="serial.old" t="Include" />
+      </e>
+      <e p="CryptographyProject2019.csproj" t="IncludeRecursive" />
+      <e p="CryptographyProject2019.sln" t="IncludeFlat" />
+      <e p="CurrentUser" t="Include">
+        <e p="private.key" t="Include" />
+      </e>
+      <e p="DecryptedMessages" t="Include" />
+      <e p="FilesForSending" t="Include" />
+      <e p="Model" t="Include">
+        <e p="Account.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="packages.config" t="Include" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+        <e p="Resources.Designer.cs" t="Include" />
+        <e p="Resources.resx" t="Include" />
+        <e p="Settings.Designer.cs" t="Include" />
+        <e p="Settings.settings" t="Include" />
+      </e>
+      <e p="ReceivedMessages" t="Include" />
+      <e p="Resources" t="Include">
+        <e p="background.jpg" t="Include" />
+      </e>
+      <e p="View" t="Include">
+        <e p="App.xaml" t="Include" />
+        <e p="App.xaml.cs" t="Include" />
+        <e p="FileDecryptionValidationWindow.xaml" t="Include" />
+        <e p="FileDecryptionValidationWindow.xaml.cs" t="Include" />
+        <e p="FileEncryptionWindow.xaml" t="Include" />
+        <e p="FileEncryptionWindow.xaml.cs" t="Include" />
+        <e p="MainWindow.xaml" t="Include" />
+        <e p="MainWindow.xaml.cs" t="Include" />
+        <e p="MakeCertificateWindow.xaml" t="Include" />
+        <e p="MakeCertificateWindow.xaml.cs" t="Include" />
+        <e p="MenuWindow.xaml" t="Include" />
+        <e p="MenuWindow.xaml.cs" t="Include" />
+        <e p="RegisterWindow.xaml" t="Include" />
+        <e p="RegisterWindow.xaml.cs" t="Include" />
+      </e>
+    </e>
+  </component>
+</project>

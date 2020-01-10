@@ -1,0 +1,29 @@
+﻿<Window x:Class="CryptographyProject2019.View.MakeCertificateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CryptographyProject2019"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="431" Width="503.333" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="0,0,-1.333,-4.667">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/background.jpg" />
+        </Grid.Background>
+        <Label Content="CREATE USER CERTIFICATE" HorizontalAlignment="Left" Margin="150,40,0,0" VerticalAlignment="Top"
+               Height="30" Width="225" FontSize="16" FontWeight="Bold" FontStyle="Italic"
+               RenderTransformOrigin="0.596,-0.156" Foreground="White" />
+        <Label Content="Username" HorizontalAlignment="Left" Margin="30,145,0,0" VerticalAlignment="Top" Height="30"
+               Width="110" Foreground="White" />
+        <TextBox Name="UsernameTextBox3" TextWrapping="NoWrap" HorizontalAlignment="Left" Height="23"
+                 Margin="155,150,0,0" VerticalAlignment="Top" Width="140" ToolTip="Type username" />
+        <Button Click="CreateCertificate" Content="CREATE CERTIFICATE" HorizontalAlignment="Left" Margin="200,320,0,0"
+                VerticalAlignment="Top" Width="125" Height="25" />
+        <Button Content="Back" HorizontalAlignment="Left" Margin="40,320,0,0" VerticalAlignment="Top" Width="75"
+                Click="Button_Click" />
+        <TextBox Name="GeneratedCertPath" HorizontalAlignment="Left" Height="23" Margin="120,237,0,0"
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="215" IsReadOnly="True" />
+        <TextBlock HorizontalAlignment="Left" Margin="20,230,0,0" TextWrapping="Wrap" Text="Path to certificate"
+                   VerticalAlignment="Top" Height="35" Width="85" Foreground="White" TextAlignment="Center" />
+    </Grid>
+</Window>

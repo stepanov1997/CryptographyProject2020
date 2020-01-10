@@ -1,0 +1,47 @@
+﻿<Window x:Class="CryptographyProject2019.View.FileEncryptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CryptographyProject2019.View"
+        mc:Ignorable="d"
+        Title="FileEncryptionWindow" Height="431" Width="503.333" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,-1.333,-4.667">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/background.jpg" />
+        </Grid.Background>
+        <Label Content="FILE ENCRYPTION" HorizontalAlignment="Left" Margin="170,35,0,0" VerticalAlignment="Top"
+               Height="30" Width="185" FontSize="16" FontWeight="Bold" FontStyle="Italic"
+               RenderTransformOrigin="0.596,-0.156" Foreground="White" />
+        <Button Content="Back" HorizontalAlignment="Left" Margin="55,345,0,0" VerticalAlignment="Top" Width="75"
+                Click="BackClick" />
+        <Label Content="File to encrypt:" Foreground="White" HorizontalAlignment="Left" Margin="37,120,0,0"
+               VerticalAlignment="Top" />
+        <Button Name="FileButton" Content="Select" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160"
+                Margin="175,120,0,0" Click="FileButton_Click" Height="27" />
+        <Label Content="Symmetric algorithm:" Foreground="White" HorizontalAlignment="Left" Margin="37,165,0,0"
+               VerticalAlignment="Top" />
+        <ComboBox Name="SymmetricComboBox" HorizontalAlignment="Left" Margin="175,165,0,0" VerticalAlignment="Top"
+                  Width="160" Height="27" SelectedValuePath="Tag"
+                  SelectedValue="{Binding YourIntProperty, Mode=TwoWay}">
+            <ComboBoxItem Name="AesItem" Content="AES" Tag="0" />
+            <ComboBoxItem Name="Rc4Item" Content="RC2" Tag="1" />
+            <ComboBoxItem Name="DesItem" Content="DES3" Tag="2" />
+        </ComboBox>
+        <Label Content="Hash algorithm" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top"
+               Margin="38,210,0,0" />
+        <ComboBox Name="HashComboBox" HorizontalAlignment="Left" Margin="175,210,0,0" VerticalAlignment="Top"
+                  Width="160" Height="27" SelectedValuePath="Tag"
+                  SelectedValue="{Binding YourIntProperty, Mode=TwoWay}">
+            <ComboBoxItem Name="SHA1Item" Content="SHA1" Tag="0" />
+            <ComboBoxItem Name="SHA256Item" Content="SHA256" Tag="1" />
+        </ComboBox>
+        <Button Name="EncryptButton" Content="ENCRYPT FILE" HorizontalAlignment="Left" Margin="200,345,0,0"
+                VerticalAlignment="Top" Width="115" Click="EncryptClick" />
+        <Label Content="Username of receiver" Foreground="White" HorizontalAlignment="Left" Margin="40,260,0,0"
+               VerticalAlignment="Top" />
+        <ComboBox Name="ReceiverComboBox" HorizontalAlignment="Left" Margin="175,258,0,0" VerticalAlignment="Top"
+                  Width="160" Height="27" />
+    </Grid>
+</Window>

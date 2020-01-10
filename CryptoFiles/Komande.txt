@@ -1,0 +1,20 @@
+# Kreiranje zahtjeva
+openssl req –new –key private.key –out request.csr –config openssl.cnf –days 3650
+openssl req -new -key private/user_keys/stepanov.key -config openssl.cnf -out requests/stepanov_request.csr
+openssl req -config openssl.cnf -new -x509 -sha384 -extensions v3_ca -key private/ca_key/ca.key -out certs/ca_cert.pem
+
+# Kreiranje i potpisivanje sertifikata CA tijela
+openssl req -new -x509 -key private\ca_key\ca.key -out certs/ca_cert.pem -config openssl.cnf -days 365
+
+# Potpisivaje sertifikata CA tijela
+openssl ca -in requests/stepanov_request.csr -config openssl.cnf -out certs/stepanov_cert.pem -keyfile private/user_keys/stepanov.key
+openssl x509 -req -days 360 -in requests/stepanov_request.csr -CA certs/ca_cert.pem -CAkey private\ca_key\ca.key -CAcreateserial -out certs/stepanov.crt -sha256
+
+# Konverzija u crt
+openssl x509 -in certs/ca_cert.pem -out certs/ca_cert.crt
+
+# Citanje sertifikata
+openssl x509 -in certs/ca_cert.pem -noout -text
+
+# Kreiranje CRL liste
+openssl ca -config openssl.cnf -gencrl -out crl/crllist.pem

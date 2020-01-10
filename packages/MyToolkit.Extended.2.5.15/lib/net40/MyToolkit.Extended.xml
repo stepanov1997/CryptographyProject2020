@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyToolkit.Extended</name>
+    </assembly>
+    <members>
+        <member name="T:MyToolkit.Utilities.StreamExtensions">
+            <summary>Provides methods to handle streams. </summary>
+        </member>
+        <member name="M:MyToolkit.Utilities.StreamExtensions.ReadToEnd(System.IO.Stream)">
+            <summary>
+            Reads all available bytes from the stream. 
+            </summary>
+            <param name="stream">The stream to read from. </param>
+            <returns>The read byte array. </returns>
+        </member>
+        <member name="M:MyToolkit.Utilities.StreamExtensions.ReadToEndAsync(System.IO.Stream)">
+            <summary>Asynchronously reads all available bytes from the stream. </summary>
+            <param name="stream">The stream to read from. </param>
+            <returns>The read byte array. </returns>
+        </member>
+        <member name="M:MyToolkit.Utilities.StreamExtensions.ReadToEndAsync(System.IO.Stream,System.Threading.CancellationToken,MyToolkit.Utilities.IProgress{System.Int64})">
+            <summary>Asynchronously reads all available bytes from the stream. </summary>
+            <param name="stream">The stream to read from. </param>
+            <param name="token">The cancellation token. </param>
+            <param name="progress">The progress. </param>
+            <returns>The read byte array. </returns>
+        </member>
+        <member name="M:MyToolkit.Utilities.StreamExtensions.ToStream(System.String)">
+            <summary>Converts a string to a memory stream. </summary>
+            <param name="str">The string to convert. </param>
+            <returns>The converted string. </returns>
+        </member>
+    </members>
+</doc>
