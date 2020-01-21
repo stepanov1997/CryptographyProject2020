@@ -2,9 +2,12 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CryptographyProject2019.Model;
+using HttpKit;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
@@ -15,9 +18,9 @@ namespace CryptographyProject2019.Controller
     public static class EncryptController
     {
         private static readonly Random RandomNumberGenerator = new Random();
-        private static readonly string[] HashAlgorithms = {"SHA1", "SHA256" };
+        private static readonly string[] HashAlgorithms = { "SHA1", "SHA256" };
         private static readonly string[] SymmetricAlgorithms = { "RC2", "AES", "DES3" };
-        public static bool EncryptFile(string message, Account receiverAccount, object locker)
+        public static bool EncryptFileAsync(string message, Account receiverAccount, object locker)
         {
             var senderUsername = AccountsController.GetInstance().CurrentAccount.Username;
             var receiverCertificatePath = receiverAccount.PathToCertificate;
@@ -47,7 +50,7 @@ namespace CryptographyProject2019.Controller
             //========================================================================
             // Encrypt symmetric key with receiver public key and save it into textfile.
             // Receiver can only read it, only he has his private key.
-            var rsaprovider = (RSACryptoServiceProvider) receiverCertificate.PublicKey.Key;
+            var rsaprovider = (RSACryptoServiceProvider)receiverCertificate.PublicKey.Key;
             var encryptedSymmetricKey =
                 Convert.ToBase64String(rsaprovider.Encrypt(Encoding.Unicode.GetBytes(symmetricKey), false));
 
@@ -80,19 +83,21 @@ namespace CryptographyProject2019.Controller
 
             var path = MakePathOfCryptedFile(receiverUsername, CheckSymmetricAlgorithm(randomSymmetricAlgorithm));
 
-            lock (locker)
+            while (true)
             {
-                while (true)
+                try
                 {
-                    try
+                    FileStream fileStream = new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.Write);
+                    using (StreamWriter sr = new StreamWriter(new NonClosingStreamWrapper(fileStream)))
                     {
-                        File.WriteAllText(path, cryptedFile);
-                        break;
+                        sr.Write(cryptedFile);
                     }
-                    catch (IOException)
-                    {
-                        Task.Delay(1000);
-                    }
+                    fileStream.Close();
+                    break;
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(40);
                 }
             }
             return true;
@@ -124,7 +129,7 @@ namespace CryptographyProject2019.Controller
             }
         }
 
-        private static HashAlgorithm RandomHashAlgorithm() => 
+        private static HashAlgorithm RandomHashAlgorithm() =>
             CheckHashAlgorithm(HashAlgorithms[RandomNumberGenerator.Next(HashAlgorithms.Length)]);
 
         private static SymmetricAlgorithm RandomSymmetricAlgorithm() => CheckSymmetricAlgorithm(SymmetricAlgorithms[RandomNumberGenerator.Next(SymmetricAlgorithms.Length)]);
@@ -185,8 +190,8 @@ namespace CryptographyProject2019.Controller
         {
             var sr = new StreamReader(path);
             var pr = new PemReader(sr);
-            var KeyPair = (AsymmetricCipherKeyPair) pr.ReadObject();
-            var rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters) KeyPair.Private);
+            var KeyPair = (AsymmetricCipherKeyPair)pr.ReadObject();
+            var rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)KeyPair.Private);
 
             var rsa = new RSACryptoServiceProvider();
             rsa.ImportParameters(rsaParams);

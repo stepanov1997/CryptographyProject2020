@@ -20,13 +20,17 @@ namespace CryptographyProject2019.View
 
         private bool _close;
         private readonly FileSystemWatcher _fileSystemWatcher = new FileSystemWatcher();
-        private Window _previousWindow;
+        private Action _closeWatcher;
+        private ChatRoomWindow _previousWindow;
         private object _locker;
-        private bool _close2;
 
         public PleaseWaitWindow()
         {
             InitializeComponent();
+        }
+        public PleaseWaitWindow(ChatRoomWindow chatRoomWindow) : this()
+        {
+            _previousWindow = chatRoomWindow;
         }
 
         // 4. get session response
@@ -54,14 +58,13 @@ namespace CryptographyProject2019.View
             }
 
             ChatWindow chatWindow = null;
+            _closeWatcher();
+            _close = true;
             Dispatcher?.Invoke(() => chatWindow = new ChatWindow().Initialize(_previousWindow, receiver));
 
-            _close2 = true;
-            //_fileSystemWatcher.EnableRaisingEvents = false;
-            //_fileSystemWatcher.Dispose();
             Dispatcher?.Invoke(delegate ()
             {
-                chatWindow?.Show();
+                chatWindow.Show();
                 _previousWindow.Hide();
                 Hide();
             });
@@ -69,9 +72,9 @@ namespace CryptographyProject2019.View
 
 
         // 1. post session request
-        public PleaseWaitWindow Initialize(Account sender, Account receiver, Window menuWindow, object locker)
+        public PleaseWaitWindow Initialize(Account sender, Account receiver, Action closeWatcher, object locker)
         {
-            _previousWindow = menuWindow;
+            _closeWatcher = closeWatcher;
             _locker = locker;
             SessionController.CreateSessionRequestResponse(sender, receiver, false, _locker);
             Task.Run(async () =>
@@ -81,7 +84,7 @@ namespace CryptographyProject2019.View
                 {
                     await Dispatcher?.InvokeAsync(() => text = ConnectionBlock.Text);
                     var i = 30;
-                    while (i > 0 && !_close2)
+                    while (i > 0 && !_close)
                     {
                         var secs = i;
                         // ReSharper disable once PossibleNullReferenceException
@@ -89,12 +92,11 @@ namespace CryptographyProject2019.View
                         await Task.Delay(1000);
                         i--;
                     }
-                    _close2 = true;
-                    //_fileSystemWatcher.Dispose();
-                    Hide();
+                    Close();
                 }
+                _closeWatcher();
             });
-            Task.Run(() => FSWatcherController.ExecuteWatcher(_fileSystemWatcher, Directory.GetCurrentDirectory() + @"\..\..\ChatRequests\", "*.sesres", ResponseCallback, ref _close));
+            Task.Run(() => FSWatcherController.ExecuteWatcher(_fileSystemWatcher, Directory.GetCurrentDirectory() + @"\..\..\ChatRequests\", "*.sesres", ResponseCallback, () => _close));
             return this;
         }
     }

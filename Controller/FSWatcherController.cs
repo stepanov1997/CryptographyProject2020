@@ -10,7 +10,7 @@ namespace CryptographyProject2019.Controller
     // ReSharper disable once InconsistentNaming
     static class FSWatcherController
     {
-        public static void ExecuteWatcher(FileSystemWatcher fileSystemWatcher, string path, string filter, FileSystemEventHandler callback, ref bool close)
+        public static void ExecuteWatcher(FileSystemWatcher fileSystemWatcher, string path, string filter, FileSystemEventHandler callback, Func<bool> close)
         {
             fileSystemWatcher.Path = path;
             //fileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess
@@ -30,10 +30,11 @@ namespace CryptographyProject2019.Controller
             //fileSystemWatcher.Renamed += new RenamedEventHandler(callback);
             fileSystemWatcher.EnableRaisingEvents = true;
 
-            while (!close)
+            while (!close())
             {
                 Task.Delay(1000);
             }
+            fileSystemWatcher.EnableRaisingEvents = false;
             fileSystemWatcher.Dispose();
         }
     }

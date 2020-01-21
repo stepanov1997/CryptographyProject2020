@@ -5,31 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptographyProject2019.View"
         mc:Ignorable="d"
-        Title="ChatWindow" Height="450" Width="800">
+        Title="ChatWindow" Height="450" Width="450" ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="../Resources/background.jpg"/>
         </Grid.Background>
-        <Border BorderBrush="Black" BorderThickness="3" Margin="15,10,43.333,375.667" Background="Azure">
+        <Border BorderBrush="Black" BorderThickness="3" Margin="15,10,18.333,375.667" Background="Azure">
             <TextBlock x:Name="Title" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="3" Margin="215,55,43.333,65.667">
+        <Border BorderBrush="Black" BorderThickness="3" Margin="15,55,18.333,65.667">
             <Border.Background>
                 <ImageBrush ImageSource="../Resources/SideChatBackground.jpg"></ImageBrush>
             </Border.Background>
-            <ScrollViewer x:Name="MessagesScrollViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Height="322" Margin="0.333,0.333,-2.333,-3" Width="532"/>
+            <ScrollViewer x:Name="MessagesScrollViewer"/>
         </Border>
-        <Border x:Name="OnlineUsers" BorderBrush="Black" BorderThickness="3" Margin="15,55,600.333,20.667">
-            <Border.Background>
-                <ImageBrush ImageSource="../Resources/SideChatBackground.jpg"></ImageBrush>
-            </Border.Background>
-            <Grid x:Name="OnlineUsersGrid"></Grid>
+        <Border BorderBrush="Black" BorderThickness="3" Margin="0,0,3.333,-0.333">
+            <Button Content="Send" HorizontalAlignment="Left" Padding="3" Margin="337.333,367.333,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="PosaljiPoruku"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="3">
-            <Button Content="Send" HorizontalAlignment="Left" Padding="3" Margin="670,365,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="PosaljiPoruku"/>
-        </Border>
-        <Border BorderBrush="Black" BorderThickness="3" Margin="215,367,138.333,20.667">
-            <TextBox x:Name="MessageBlock" Background="Azure" Margin="0.333,0.333,0.333,2"></TextBox>
+        <Border BorderBrush="Black" BorderThickness="3" Margin="15,370,123.333,17.667">
+            <TextBox x:Name="MessageBlock" Background="Azure" ></TextBox>
         </Border>
     </Grid>
 </Window>

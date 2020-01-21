@@ -4,8 +4,10 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using HttpKit;
 
 namespace CryptographyProject2019.Controller
 {
@@ -69,20 +71,21 @@ namespace CryptographyProject2019.Controller
             ext = ext?.Substring(1);
             SymmetricAlgorithm symmetricAlgorithm = EncryptController.CheckSymmetricAlgorithm(ext);
 
+
             string content;
-            lock (locker)
+
+            while (true)
             {
-                while (true)
+                try
                 {
-                    try
-                    {
-                        content = File.ReadAllText(path);
-                        break;
-                    }
-                    catch (IOException)
-                    {
-                        Task.Delay(1000);
-                    }
+                    FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    content = File.ReadAllText(path);
+                    fileStream.Close();
+                    break;
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(200);
                 }
             }
 

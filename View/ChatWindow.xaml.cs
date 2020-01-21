@@ -30,8 +30,8 @@ namespace CryptographyProject2019.View
     public partial class ChatWindow : Window
     {
         private Window _previousWindow;
-        private readonly FileSystemWatcher _fileSystemWatcher = new FileSystemWatcher();
-        private OnlineUsers _onlineUsers;
+        private readonly FileSystemWatcher _fileSystemWatcherMessages = new FileSystemWatcher();
+        private readonly FileSystemWatcher _fileSystemWatcherClose = new FileSystemWatcher();
         private Account _receiver;
         private bool _close;
         private object locker = new object();
@@ -43,34 +43,43 @@ namespace CryptographyProject2019.View
             InitializeComponent();
         }
 
-        private void AddOnlineAccounts(object e, FileSystemEventArgs fsea)
-        {
-            AccountsController.GetInstance().DeSerializeNow();
-            Dispatcher?.Invoke(() =>
-            {
-                _onlineUsers.Clear();
-                AccountsController.GetInstance().ReadOnlineAccounts().ForEach(_onlineUsers.AddRow);
-            });
-        }
-
         public ChatWindow Initialize(Window previousWindow, Account receiver)
         {
             _previousWindow = previousWindow;
             _receiver = receiver;
-            OnlineUsersGrid.Children.Add(_onlineUsers = new OnlineUsers().Initialize(false));
             Title.Text = AccountsController.GetInstance().CurrentAccount.Username + " <---> " + receiver.Username;
-            string path = Directory.GetCurrentDirectory() + @"/../../CurrentUsers/";
             string pathMessages = Directory.GetCurrentDirectory() + $"/../../ReceivedMessages/{AccountsController.GetInstance().CurrentAccount.Username}/";
+            if (!Directory.Exists(pathMessages))
+                Directory.CreateDirectory(pathMessages);
+            string pathClose = Directory.GetCurrentDirectory() + $"/../../ChatRequests/";
             foreach (var enumerateFile in Directory.EnumerateFiles(pathMessages))
             {
                 File.Delete(enumerateFile);
             }
-            Task.Run(() => FSWatcherController.ExecuteWatcher(_fileSystemWatcher, path, "*.key", AddOnlineAccounts, ref _close));
-            Task.Run(() => FSWatcherController.ExecuteWatcher(_fileSystemWatcher, pathMessages, "*.*", DecryptMessage, ref _close));
+            Task.Run(() => FSWatcherController.ExecuteWatcher(_fileSystemWatcherMessages, pathMessages, "*.*", DecryptMessage,
+                () => _close));
+            Task.Run(() => FSWatcherController.ExecuteWatcher(_fileSystemWatcherClose, pathClose, "*.sesreq", Close,
+                () => _close));
             MakeGrid();
-            AddOnlineAccounts(null, null);
             MessageBlock.Text = receiver.Username;
             return this;
+        }
+
+        private void Close(object sender, FileSystemEventArgs e)
+        {
+            if (Path.GetFileNameWithoutExtension(e.Name) != AccountsController.GetInstance().CurrentAccount.Username) return;
+            Account receiverAcc = AccountsController.GetInstance().CurrentAccount;
+            Account senderAcc =
+                SessionController.ReadSessionRequest(receiverAcc, false, locker);
+
+            if (senderAcc.Username != _receiver.Username)
+            {
+                return;
+            }
+            MessageBox.Show($"Session with {_receiver.Username} is over!", "Chat session", MessageBoxButton.OK, MessageBoxImage.Information);
+            Hide();
+            ClosingController.CloseApplication();
+            base.Close();
         }
 
         // ReSharper disable once InconsistentNaming
@@ -86,7 +95,18 @@ namespace CryptographyProject2019.View
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            ClosingController.CloseApplication();
+            var result = MessageBox.Show($"Do you want to cancel chat session with {_receiver.Username}?", "Chat session", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Hide();
+                SessionController.CreateSessionRequestResponse(AccountsController.GetInstance().CurrentAccount, _receiver,
+                    false, locker);
+                ClosingController.CloseApplication();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
             base.OnClosing(e);
         }
 
@@ -99,7 +119,7 @@ namespace CryptographyProject2019.View
                 return;
             }
 
-            if (!EncryptController.EncryptFile(message, _receiver, locker))
+            if (!EncryptController.EncryptFileAsync(message, _receiver, locker))
             {
                 MessageBox.Show("Slanje poruke je neuspjesno!");
             }
@@ -168,7 +188,7 @@ namespace CryptographyProject2019.View
                 MessageBox.Show("Message can't be decrypted!", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            Dispatcher?.Invoke(()=>AddMessageUi(new Message(message, DateTime.Now, MessageProperty.Received)));
+            Dispatcher?.Invoke(() => AddMessageUi(new Message(message, DateTime.Now, MessageProperty.Received)));
         }
     }
 }

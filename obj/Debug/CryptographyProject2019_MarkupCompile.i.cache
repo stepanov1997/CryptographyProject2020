@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\stepa\Desktop\CryptographyProject2020\View\App.xaml
-91172552564
+7-818689930
 
-261722112658
+25-269994164
 126999040947
-View\ChatWindow.xaml;View\FileDecryptionValidationWindow.xaml;View\FileEncryptionWindow.xaml;View\OnlineUsers.xaml;View\MainWindow.xaml;View\MenuWindow.xaml;View\RegisterWindow.xaml;View\MakeCertificateWindow.xaml;View\PleaseWaitWindow.xaml;
+View\ChatWindow.xaml;View\OnlineUsers.xaml;View\LoginWindow.xaml;View\ChatRoomWindow.xaml;View\RegisterWindow.xaml;View\MakeCertificateWindow.xaml;View\PleaseWaitWindow.xaml;
 
-True
+False
 

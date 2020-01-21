@@ -131,6 +131,7 @@
     <Compile Include="Controller\DecryptController.cs" />
     <Compile Include="Controller\EncryptController.cs" />
     <Compile Include="Controller\FSWatcherController.cs" />
+    <Compile Include="Controller\NonClosingStreamWrapper.cs" />
     <Compile Include="Controller\SessionController.cs" />
     <Compile Include="Controller\Steganography.cs" />
     <Compile Include="Controller\ValidateController.cs" />
@@ -138,17 +139,11 @@
     <Compile Include="View\ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FileDecryptionValidationWindow.xaml.cs">
-      <DependentUpon>FileDecryptionValidationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\FileEncryptionWindow.xaml.cs">
-      <DependentUpon>FileEncryptionWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\OnlineUsers.xaml.cs">
       <DependentUpon>OnlineUsers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MenuWindow.xaml.cs">
-      <DependentUpon>MenuWindow.xaml</DependentUpon>
+    <Compile Include="View\ChatRoomWindow.xaml.cs">
+      <DependentUpon>ChatRoomWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
@@ -163,19 +158,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FileDecryptionValidationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\FileEncryptionWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\OnlineUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -186,11 +173,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\MenuWindow.xaml">
+    <Page Include="View\ChatRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

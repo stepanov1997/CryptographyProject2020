@@ -9,11 +9,11 @@ using Microsoft.Win32;
 namespace CryptographyProject2019.View
 {
     /// <summary>
-    ///     Interaction logic for MainWindow.xaml
+    ///     Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginWindow : Window
     {
-        public MainWindow()
+        public LoginWindow()
         {
             InitializeComponent();
             Program.Run();
@@ -40,7 +40,6 @@ namespace CryptographyProject2019.View
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            File.Delete(Directory.GetCurrentDirectory() + $"/../../CurrentUsers/{AccountsController.GetInstance().CurrentAccount.Username}.key");
             Process.GetCurrentProcess().Kill();
             base.OnClosing(e);
         }
@@ -58,7 +57,8 @@ namespace CryptographyProject2019.View
             {
                 MessageBox.Show("Username and password are valid. Congratulations.", "Successful login");
                 AccountsController.GetInstance().ChangeCurrentAccount(account);
-                var mw = new MenuWindow(this);
+                File.Delete(Directory.GetCurrentDirectory() + $"/../../ChatRequests/{AccountsController.GetInstance().CurrentAccount.Username}.sesreq");
+                var mw = new ChatRoomWindow(this);
                 mw.Show();
                 Hide();
             }
