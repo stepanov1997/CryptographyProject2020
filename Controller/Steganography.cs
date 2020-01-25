@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CryptographyProject2019.Controller
 {
-    class Steganography
+    static class Steganography
     {
         enum State
         {
@@ -15,11 +15,6 @@ namespace CryptographyProject2019.Controller
             FillWithZeros
         };
 
-        /// <summary>
-        /// Creates a bitmap from an image without indexed pixels
-        /// </summary>
-        /// <param name="src"></param>
-        /// <returns></returns>
         public static Bitmap CreateNonIndexedImage(Image src)
         {
             Bitmap newBmp = new Bitmap(src.Width, src.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -42,7 +37,7 @@ namespace CryptographyProject2019.Controller
 
             int zeros = 0;
 
-            int R = 0, G = 0, B = 0;
+            int R, G, B;
 
             for (int i = 0; i < bmp.Height; i++)
             {
@@ -133,7 +128,7 @@ namespace CryptographyProject2019.Controller
             int colorUnitIndex = 0;
             int charValue = 0;
 
-            string extractedText = String.Empty;
+            string extractedText = string.Empty;
 
             for (int i = 0; i < bmp.Height; i++)
             {

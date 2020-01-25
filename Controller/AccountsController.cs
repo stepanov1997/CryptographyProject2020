@@ -74,15 +74,18 @@ namespace CryptographyProject2019.Controller
             }
         }
 
-        public bool DeSerializeNow()
+        public void DeSerializeNow()
         {
-            if (!File.Exists("accounts.dat")) return false;
+            if (!File.Exists("accounts.dat"))
+            {
+                Accounts = new Dictionary<string, Account>();
+                return;
+            }
             using (var f = File.OpenRead("accounts.dat"))
             {
                 var bin = new BinaryFormatter();
-                if (!(bin.Deserialize(f) is Dictionary<string, Account> accounts)) return false;
+                if (!(bin.Deserialize(f) is Dictionary<string, Account> accounts)) return;
                 Accounts = accounts;
-                return true;
             }
         }
 

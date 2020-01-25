@@ -258,7 +258,6 @@
     <None Include="CryptoFiles\rootca.pem" />
     <None Include="CryptoFiles\serial" />
     <None Include="CryptoFiles\serial.old" />
-    <None Include="CurrentUsers\private.key" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -270,8 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ChatRequests\" />
-    <Folder Include="DecryptedMessages\" />
-    <Folder Include="FilesForSending\" />
+    <Folder Include="CurrentUsers\" />
     <Folder Include="ReceivedMessages\" />
   </ItemGroup>
   <ItemGroup>

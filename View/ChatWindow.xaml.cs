@@ -76,8 +76,9 @@ namespace CryptographyProject2019.View
             {
                 return;
             }
+
+            _close = true;
             MessageBox.Show($"Session with {_receiver.Username} is over!", "Chat session", MessageBoxButton.OK, MessageBoxImage.Information);
-            Hide();
             ClosingController.CloseApplication();
             base.Close();
         }
@@ -98,7 +99,7 @@ namespace CryptographyProject2019.View
             var result = MessageBox.Show($"Do you want to cancel chat session with {_receiver.Username}?", "Chat session", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                Hide();
+                _close = true;
                 SessionController.CreateSessionRequestResponse(AccountsController.GetInstance().CurrentAccount, _receiver,
                     false, locker);
                 ClosingController.CloseApplication();
