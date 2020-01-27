@@ -14,3 +14,4 @@ V	200826121949Z		10	unknown	/C=BA/ST=RS/O=Elektrotehnicki fakultet/OU=CA_ETFBL/C
 V	200828205933Z		11	unknown	/C=BA/ST=RS/O=Elektrotehnicki fakultet/OU=CA_ETFBL/CN=Neven Cvetnic/emailAddress=neven.cvetnic@gmail.com
 V	200828213333Z		12	unknown	/C=BA/ST=RS/O=Elektrotehnicki fakultet/OU=CA_ETFBL/CN=Mirko Mirkic/emailAddress=mirko.mirkic@gmail.com
 V	201104183339Z		13	unknown	/C=BA/ST=RS/O=Elektrotehnicki fakultet/OU=CA_ETFBL/CN=Pero/emailAddress=pero.peric@gmail.com
+V	210124171958Z		14	unknown	/C=BA/ST=RS/O=Elektrotehnicki fakultet/OU=CA_ETFBL/CN=Aleksandar Kelec/emailAddress=aleksandar.kelec@etf.unibl.org

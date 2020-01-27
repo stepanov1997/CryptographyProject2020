@@ -61,7 +61,6 @@ namespace CryptographyProject2019.View
             Task.Run(() => FSWatcherController.ExecuteWatcher(_fileSystemWatcherClose, pathClose, "*.sesreq", Close,
                 () => _close));
             MakeGrid();
-            MessageBlock.Text = receiver.Username;
             return this;
         }
 
@@ -116,13 +115,14 @@ namespace CryptographyProject2019.View
             string message = MessageBlock.Text;
             if (message == "")
             {
-                MessageBox.Show("Unesite poruku pa pokušajte ponovo poslati!");
+                MessageBox.Show("Please enter a message and try sending again!");
                 return;
             }
 
+            MessageBlock.Text = "";
             if (!EncryptController.EncryptFileAsync(message, _receiver, locker))
             {
-                MessageBox.Show("Slanje poruke je neuspjesno!");
+                MessageBox.Show("Sending message failed!");
             }
             AddMessageUi(new Message(message, DateTime.Now, MessageProperty.Sent));
         }
